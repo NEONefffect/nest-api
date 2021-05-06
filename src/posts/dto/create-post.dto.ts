@@ -1,0 +1,9 @@
+export class CreatePostDto{
+    
+    readonly title: string;
+    readonly content: string
+    // readonly author: number
+    readonly date: Date
+
+    
+}
