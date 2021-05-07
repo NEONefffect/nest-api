@@ -1,9 +1,10 @@
+import { Users } from "src/users/schemas/user.schemas"
+
 export class CreatePostDto{
     
-    readonly title: string;
-    readonly content: string
-    // readonly author: number
-    readonly date: Date
-
+    title: string
+    content: string
+    author: Users
+    date: Date
     
 }

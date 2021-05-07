@@ -14,7 +14,7 @@ export class PostsController {
         return this.postService.getAllPosts()  
     }
 
-    @Get()
+    @Get(':id')
     getById(@Param('id') id:string):Promise<Posts>{
         return this.postService.getPostById(id)
     }
@@ -25,12 +25,12 @@ export class PostsController {
         return this.postService.createPost(CreatePostDto)
     }
 
-    @Put('id')
+    @Put(':id')
     update(@Body() updatePostDto:UpdatePostDto, @Param('id') id:string): Promise<Posts>{
         return this.postService.updatePost(id, updatePostDto)
     }
 
-    @Delete('id')
+    @Delete(':id')
     deletePost(@Param('id') id:string): Promise<Posts>{
         return this.postService.deletePost(id)
     }

@@ -26,7 +26,7 @@ export class PostsService {
     return this.postModel.findByIdAndRemove(id)
    }
    
-   async updatePost(id:string,postDto:UpdatePostDto){
-        return this.postModel.findByIdAndUpdate(id,postDto)
+   async updatePost(id:string , updatePostDto:UpdatePostDto){
+        return this.postModel.findByIdAndUpdate(id,updatePostDto)
    }
 }
