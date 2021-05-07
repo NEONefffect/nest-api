@@ -21,7 +21,7 @@ export class UsersService {
     return this.userModel.find().exec();
   }
 
-  async findOne(id:string):Promise<Users> {
+  async findById(id:string):Promise<Users> {
     return this.userModel.findById(id)
   }
 
@@ -31,5 +31,9 @@ export class UsersService {
 
   async remove(id: string) {
     return this.userModel.findByIdAndDelete(id);
+  }
+
+  async findOne(login:string):Promise<Users> {
+    return this.userModel.findOne({login:login})
   }
 }

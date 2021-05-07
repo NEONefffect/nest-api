@@ -1,7 +1,6 @@
 import { Posts } from "src/posts/schemas/post.shemas"
 
 export class CreateUserDto {
-        
     firstName:string
     lastName:string  
     email: string
