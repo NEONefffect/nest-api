@@ -1,10 +1,23 @@
-import { Users } from "src/users/schemas/user.schemas"
+import {
+  IsDateString,
+  IsMongoId,
+  IsString,
+  Length,
+  MinLength,
+} from 'class-validator';
 
-export class CreatePostDto{
-    
-    title: string
-    content: string
-    author: Users
-    date: Date
-    
+export class CreatePostDto {
+  @Length(3, 256)
+  @IsString()
+  title: string;
+
+  @MinLength(3)
+  @IsString()
+  content: string;
+
+  @IsMongoId()
+  author: string;
+
+  @IsDateString()
+  date: Date;
 }
