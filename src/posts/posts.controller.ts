@@ -8,14 +8,17 @@ import {
   Body,
   Put,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard.t';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostsService } from './posts.service';
-import { Posts } from './schemas/post.shemas';
+import { Posts } from './schemas/post.schemas';
 
+@UseGuards(JwtAuthGuard)
 @ApiTags('Posts')
 @Controller('posts')
 export class PostsController {
@@ -32,7 +35,8 @@ export class PostsController {
   }
 
   @Post()
-  create(@Body() CreatePostDto: CreatePostDto): Promise<Posts> {
+  create(@Body() CreatePostDto: CreatePostDto ,@Req() req  ): Promise<Posts> {
+    CreatePostDto.author = req.user.userId
     return this.postService.createPost(CreatePostDto);
   }
 
@@ -40,8 +44,9 @@ export class PostsController {
   update(
     @Body() updatePostDto: UpdatePostDto,
     @Param('id') id: string,
+    @Req() req : Request
   ): Promise<Posts> {
-    return this.postService.updatePost(id, updatePostDto);
+    return this.postService.updatePost(id, updatePostDto ,req);
   }
 
   @Delete(':id')
@@ -49,3 +54,7 @@ export class PostsController {
     return this.postService.deletePost(id);
   }
 }
+function Rec() {
+  throw new Error('Function not implemented.');
+}
+

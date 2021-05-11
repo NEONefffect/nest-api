@@ -1,9 +1,10 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Posts, PostDocument } from './schemas/post.shemas';
+import { Posts, PostDocument } from './schemas/post.schemas';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { isBuffer } from 'util';
 
 @Injectable()
 export class PostsService {
@@ -28,7 +29,11 @@ export class PostsService {
     return this.postModel.findByIdAndRemove(id);
   }
 
-  async updatePost(id: string, updatePostDto: UpdatePostDto) {
-    return this.postModel.findByIdAndUpdate(id, updatePostDto);
+  async updatePost(id: string, updatePostDto: UpdatePostDto  ) {
+    const post = await this.getPostById(id)
+    if(post.author === req.user.userId ){
+      return this.postModel.findByIdAndUpdate(id, updatePostDto);
+    }
+     
   }
 }

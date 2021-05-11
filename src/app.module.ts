@@ -5,7 +5,7 @@ import { PostsModule } from './posts/posts.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { CommonModule } from './common/common.module';
+import { configModule } from './configure.root';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { CommonModule } from './common/common.module';
     UsersModule,
     MongooseModule.forRoot('mongodb://localhost:27017/nest'),
     AuthModule,
-    CommonModule,
+    configModule,
   ],
   controllers: [AppController],
   providers: [AppService],
