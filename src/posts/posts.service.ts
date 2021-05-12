@@ -1,10 +1,12 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+
 import { Posts, PostDocument } from './schemas/post.schemas';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { Request } from 'express'
+import { IUser } from 'src/common/user.interface';
+
 
 @Injectable()
 export class PostsService {
@@ -26,13 +28,17 @@ export class PostsService {
     return newPost.save();
   }
 
-  async deletePost(id: string): Promise<Posts> {
-    return this.postModel.findByIdAndRemove(id);
+  async deletePost(id: string, user:IUser): Promise<Posts> {
+    const post = await this.getPostById(id)
+    if(post.author.toString() === user.userId || user.role === 'Admin'){
+      return this.postModel.findByIdAndRemove(id);
+    }
+    
   }
 
-  async updatePost(id: string, updatePostDto: UpdatePostDto ,userId:string ) {
+  async updatePost(id: string, updatePostDto: UpdatePostDto ,user:IUser) {
     const post = await this.getPostById(id)
-    if(post.author.toString() === userId ){
+    if(post.author.toString() === user.userId || user.role === 'Admin'){
       return this.postModel.findByIdAndUpdate(id, updatePostDto);
     }
      

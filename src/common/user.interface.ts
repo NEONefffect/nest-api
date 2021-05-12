@@ -1,6 +1,9 @@
 export interface IRequsetUser extends Request{
-    user: {
-        userId: string
-        login : string
-    }
+    user: IUser
 }
+ 
+export interface IUser {
+    userId: string
+    login : string
+    role  : string
+ }
