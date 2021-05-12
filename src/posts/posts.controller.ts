@@ -17,6 +17,8 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostsService } from './posts.service';
 import { Posts } from './schemas/post.schemas';
+import { User } from '../auth/user.decorator'
+import { IRequsetUser} from "../common/user.interface"
 
 @UseGuards(JwtAuthGuard)
 @ApiTags('Posts')
@@ -35,8 +37,12 @@ export class PostsController {
   }
 
   @Post()
-  create(@Body() CreatePostDto: CreatePostDto ,@Req() req  ): Promise<Posts> {
-    CreatePostDto.author = req.user.userId
+  create (
+    @Body() CreatePostDto: CreatePostDto ,
+    @User('userId') userId :string,
+    @Req() { user }:IRequsetUser
+    ): Promise<Posts> {
+    CreatePostDto.author = user.userId
     return this.postService.createPost(CreatePostDto);
   }
 
@@ -44,9 +50,9 @@ export class PostsController {
   update(
     @Body() updatePostDto: UpdatePostDto,
     @Param('id') id: string,
-    @Req() req : Request
-  ): Promise<Posts> {
-    return this.postService.updatePost(id, updatePostDto ,req);
+    @Req() { user }:IRequsetUser
+    ): Promise<Posts> {
+    return this.postService.updatePost(id, updatePostDto, user.userId );
   }
 
   @Delete(':id')

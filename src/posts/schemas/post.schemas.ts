@@ -16,9 +16,8 @@ export class Posts {
   date: Date;
 
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
-    required: true,
+    type: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' }
   })
-  author: Users[];
+  author: Users;
 }
 export const PostsSchema = SchemaFactory.createForClass(Posts);

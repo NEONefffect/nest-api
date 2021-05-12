@@ -15,9 +15,7 @@ export class CreatePostDto {
   @IsString()
   content: string;
 
-  // @IsMongoId()
+  @IsMongoId()
   author: string;
 
-  // @IsDateString()
-  date: Date;
 }
