@@ -17,21 +17,21 @@ import { Users } from './schemas/user.schemas';
 import { Roles } from 'src/auth/role.decorator';
 import { RolesGuard } from 'src/auth/role.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard.t';
+import { Auth } from 'src/auth/auth.decorator';
 
-@UseGuards(JwtAuthGuard)
+
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  @Roles("Admin")
-  @UseGuards(RolesGuard)
   create(@Body() createUserDto: CreateUserDto): Promise<Users> {
     return this.usersService.create(createUserDto);
   }
-
+  
   @Get()
+  @Auth('Admin')
   findAll() {
     return this.usersService.findAll();
   }
