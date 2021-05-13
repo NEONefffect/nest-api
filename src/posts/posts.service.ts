@@ -19,10 +19,11 @@ export class PostsService {
   }
 
   async getPostById(id: string): Promise<Posts> {
-    return this.postModel.findById(id);
+    return (await this.postModel.findById(id)).populated('author');
   }
 
-  async createPost(postDto: CreatePostDto): Promise<Posts> {
+  async createPost(postDto: CreatePostDto , author:string): Promise<Posts> {
+    postDto.author = author
     const newPost = new this.postModel(postDto);
     console.log(newPost,postDto)
     return newPost.save();

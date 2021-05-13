@@ -26,7 +26,7 @@ export class Users {
   @Prop()
   password: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Posts' }] })
+  @Prop({ type:[ { type: mongoose.Schema.Types.ObjectId, ref: 'Posts' }] })
   posts: Posts[];
 }
 export const UsersSchema = SchemaFactory.createForClass(Users);

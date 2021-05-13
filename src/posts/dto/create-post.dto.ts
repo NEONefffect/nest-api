@@ -5,6 +5,7 @@ import {
   Length,
   MinLength,
 } from 'class-validator';
+import * as mongoose from 'mongoose';
 
 export class CreatePostDto {
   @Length(3, 256)
@@ -15,7 +16,6 @@ export class CreatePostDto {
   @IsString()
   content: string;
 
-  // @IsMongoId()
-  author: string;
+  author?:string
 
 }

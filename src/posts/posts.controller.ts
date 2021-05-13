@@ -20,9 +20,9 @@ import { Posts } from './schemas/post.schemas';
 import { IRequsetUser} from "../common/user.interface"
 import { Roles } from 'src/auth/role.decorator';
 import { RolesGuard } from 'src/auth/role.guard';
+import { Auth } from 'src/auth/auth.decorator';
 
-
-@UseGuards(JwtAuthGuard)
+@Auth("Admin","User")
 @ApiTags('Posts')
 @Controller('posts')
 export class PostsController {
@@ -45,8 +45,8 @@ export class PostsController {
     @Body() CreatePostDto: CreatePostDto ,
     @Req() { user }:IRequsetUser
     ): Promise<Posts> {
-    CreatePostDto.author = user.userId
-    return this.postService.createPost(CreatePostDto);
+      const userId = user.userId
+      return this.postService.createPost(CreatePostDto,userId);
   }
 
   @Put(':id')

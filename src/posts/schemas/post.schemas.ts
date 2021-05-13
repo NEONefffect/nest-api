@@ -21,3 +21,4 @@ export class Posts {
   author: Users;
 }
 export const PostsSchema = SchemaFactory.createForClass(Posts);
+
