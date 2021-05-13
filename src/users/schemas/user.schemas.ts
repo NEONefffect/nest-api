@@ -1,12 +1,11 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Posts } from 'src/posts/schemas/post.schemas';
-import * as mongoose from 'mongoose';
-import { Document } from 'mongoose';
+import { Document , Types  } from 'mongoose';
 
 export type UserDocument = Users & Document;
 
 @Schema()
-export class Users {
+export class Users extends Document {
  
   @Prop({ required: true })
   firstName: string;
@@ -26,7 +25,7 @@ export class Users {
   @Prop()
   password: string;
 
-  @Prop({ type:[ { type: mongoose.Schema.Types.ObjectId, ref: 'Posts' }] })
-  posts: Posts[];
+  @Prop({ type: [Types.ObjectId], ref: 'Posts' } )
+  posts: string;
 }
 export const UsersSchema = SchemaFactory.createForClass(Users);

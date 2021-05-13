@@ -19,7 +19,7 @@ export class PostsService {
   }
 
   async getPostById(id: string): Promise<Posts> {
-    return (await this.postModel.findById(id)).populated('author');
+    return await this.postModel.findById(id).populate('author').exec()
   }
 
   async createPost(postDto: CreatePostDto , author:string): Promise<Posts> {
@@ -31,7 +31,7 @@ export class PostsService {
 
   async deletePost(id: string, user:IUser): Promise<Posts> {
     const post = await this.getPostById(id)
-    if(post.author.toString() === user.userId || user.role === 'Admin'){
+    if(post.author.toString() === user.id || user.role === 'Admin'){
       return this.postModel.findByIdAndRemove(id);
     }
     
@@ -39,7 +39,7 @@ export class PostsService {
 
   async updatePost(id: string, updatePostDto: UpdatePostDto ,user:IUser) {
     const post = await this.getPostById(id)
-    if(post.author.toString() === user.userId || user.role === 'Admin'){
+    if(post.author.toString() === user.id || user.role === 'Admin'){
       return this.postModel.findByIdAndUpdate(id, updatePostDto);
     }
      

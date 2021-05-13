@@ -45,7 +45,7 @@ export class PostsController {
     @Body() CreatePostDto: CreatePostDto ,
     @Req() { user }:IRequsetUser
     ): Promise<Posts> {
-      const userId = user.userId
+      const userId = user.id
       return this.postService.createPost(CreatePostDto,userId);
   }
 

@@ -3,7 +3,7 @@ export interface IRequsetUser extends Request{
 }
  
 export interface IUser {
-    userId: string
+    id: string
     login : string
     role  : string
  }

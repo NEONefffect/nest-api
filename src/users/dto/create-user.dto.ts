@@ -7,6 +7,7 @@ import {
   IsEmail,
   IsEnum,
   ArrayContains,
+  IsArray,
 } from 'class-validator';
 
 import { Posts } from 'src/posts/schemas/post.schemas';
@@ -33,7 +34,6 @@ export class CreateUserDto {
   @Length(6, 15)
   @IsString()
   password: string;
-	
-  posts: Posts[];
+  
 }
 
