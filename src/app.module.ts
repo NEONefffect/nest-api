@@ -5,10 +5,7 @@ import { PostsModule } from './posts/posts.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { configModule } from './configure.root';
 import { CommonModule } from './common/common.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './auth/role.guard';
 
 @Module({
   imports: [
@@ -16,7 +13,6 @@ import { RolesGuard } from './auth/role.guard';
     UsersModule,
     MongooseModule.forRoot('mongodb://localhost:27017/nest'),
     AuthModule,
-    configModule,
     CommonModule,
   ],
   controllers: [AppController],

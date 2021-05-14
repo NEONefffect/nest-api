@@ -2,8 +2,6 @@ import {
   Controller,
   Get,
   Post,
-  HttpCode,
-  HttpStatus,
   Param,
   Body,
   Put,
@@ -12,7 +10,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard.t';
+
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostsService } from './posts.service';
@@ -21,6 +19,7 @@ import { IRequsetUser} from "../common/user.interface"
 import { Roles } from 'src/auth/role.decorator';
 import { RolesGuard } from 'src/auth/role.guard';
 import { Auth } from 'src/auth/auth.decorator';
+
 
 @Auth("Admin","User")
 @ApiTags('Posts')

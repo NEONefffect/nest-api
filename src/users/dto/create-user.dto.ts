@@ -1,16 +1,11 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsDateString,
-  IsMongoId,
   IsString,
   Length,
-  MinLength,
   IsEmail,
   IsEnum,
-  ArrayContains,
-  IsArray,
 } from 'class-validator';
 
-import { Posts } from 'src/posts/schemas/post.schemas';
 
 export class CreateUserDto {
   @Length(3, 20)
@@ -21,6 +16,7 @@ export class CreateUserDto {
   @IsString()
   lastName: string;
 
+  @ApiProperty({ format: 'email' })
   @IsEmail()
   email: string;
   

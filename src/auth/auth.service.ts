@@ -4,9 +4,11 @@ import * as bcrypt from 'bcrypt';
 
 import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+require('dotenv-flow').config();
 
-
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const saltRounds = 5;
+
 
 
 @Injectable()
@@ -17,7 +19,7 @@ export class AuthService {
   ) {}
   
   async login(req): Promise<any>  {
-    const { login ,password } = req
+    const { login, password } = req
     const user = await this.validateUser( login, password )
     return this.generateToken(user)
 }
