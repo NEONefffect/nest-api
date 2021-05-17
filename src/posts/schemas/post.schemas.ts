@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document , Schema as MongooseSchema } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
 export type PostDocument = Posts & Document;
 
@@ -14,7 +14,7 @@ export class Posts extends Document {
   @Prop({ default: Date.now })
   date: Date;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: "Users" })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users' })
   author: MongooseSchema.Types.ObjectId | string;
 }
 export const PostsSchema = SchemaFactory.createForClass(Posts);
