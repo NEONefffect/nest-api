@@ -1,7 +1,5 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
-import { Posts } from 'src/posts/schemas/post.schemas';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Post } from '@nestjs/common';
 
 export type UserDocument = Users & Document;
 
@@ -13,13 +11,13 @@ export class Users {
   @Prop({ required: true })
   lastName: string;
 
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Prop({ enum: ['User', 'Admin'] })
   role: string;
 
-  @Prop()
+  @Prop({ unique: true })
   login: string;
 
   @Prop()

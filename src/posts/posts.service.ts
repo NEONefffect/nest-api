@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { Posts, PostDocument } from './schemas/post.schemas';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { IUser } from 'src/common/user.interface';
+import { IUser } from 'src/common/interface/user.interface';
 
 @Injectable()
 export class PostsService {

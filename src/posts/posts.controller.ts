@@ -6,8 +6,8 @@ import {
   Body,
   Put,
   Delete,
-  UseGuards,
   Req,
+  UseFilters,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -15,19 +15,18 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PostsService } from './posts.service';
 import { Posts } from './schemas/post.schemas';
-import { IRequsetUser } from '../common/user.interface';
-import { Roles } from 'src/auth/role.decorator';
-import { RolesGuard } from 'src/auth/role.guard';
-import { Auth } from 'src/auth/auth.decorator';
+import { IRequsetUser } from '../common/interface/user.interface';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 
 @Auth('Admin', 'User')
 @ApiTags('Posts')
 @Controller('posts')
+@UseFilters(HttpExceptionFilter)
 export class PostsController {
   constructor(private readonly postService: PostsService) {}
 
   @Get()
-  @UseGuards(RolesGuard)
   getAllPosts(): Promise<Posts[]> {
     return this.postService.getAllPosts();
   }

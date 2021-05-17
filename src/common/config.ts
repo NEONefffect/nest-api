@@ -8,5 +8,5 @@ export default {
   PORT: process.env.PORT || 3000,
   IS_PRODUCTION: process.env.NODE_ENV === 'production',
   JWT_SECRET: process.env.JWT_SECRET,
-  DB_CONNECT_URL: '',
+  DB_CONNECT_URL: 'mongodb://localhost:27017/nest',
 };

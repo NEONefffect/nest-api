@@ -6,7 +6,7 @@ import { Users, UserDocument } from './schemas/user.schemas';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PostDocument, Posts } from 'src/posts/schemas/post.schemas';
-import { IUser } from 'src/common/user.interface';
+import { IUser } from 'src/common/interface/user.interface';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -18,8 +18,6 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<Users> {
     const newUser = new this.userModel(createUserDto);
-    console.log(createUserDto);
-    console.log(newUser);
     return newUser.save();
   }
 
